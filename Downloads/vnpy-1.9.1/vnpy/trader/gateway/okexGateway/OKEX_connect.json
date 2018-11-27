@@ -1,0 +1,5 @@
+{
+
+    "trace": false,
+    "symbols": ["eth_btc", "btc_usdt", "eth_usdt"]
+}
