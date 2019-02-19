@@ -28,19 +28,19 @@ if __name__ == '__main__':
     engine.setBacktestingMode(engine.BAR_MODE)
 
     # 设置回测用的数据起始日期
-    engine.setStartDate('20180801')
+    engine.setStartDate('20140101')
     #engine.setStartDate('20130104')
     #engine.setStartDate('20110101')
     # 设置产品相关参数
-    engine.setSlippage(0.0001)     # 股指1跳
-    engine.setRate(0.3/1000)   # 万0.3
+    engine.setSlippage(1)     # 股指1跳
+    engine.setRate(0)   # 万0.3
     engine.setSize(1)         # 股指合约大小
-    engine.setPriceTick(0.0001)    # 股指最小价格变动
+    engine.setPriceTick(1)    # 股指最小价格变动
     
     # 设置使用的历史数据库
     #engine.setDatabase(MINUTE_DB_NAME, 'IF99')
     #engine.setDatabase(MINUTE_DB_NAME, 'eosquarter.OKEX')
-    engine.setDatabase('Matrixdata_bar', 'EOS/USD.OK.TW')
+    engine.setDatabase('VnTrader_Daily_Db', 'CU888')
     # 在引擎中创建策略对象
     d = {}
     engine.initStrategy(TurtleTradingStrategy, d)

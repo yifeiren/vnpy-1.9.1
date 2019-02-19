@@ -1,5 +1,6 @@
 {
-
+    "apiKey": "c7c1229b-a4fa-41c8-81ab-4cddebed047a",
+    "secretKey": "952FD94AC2F9B77ED9DE6FCFD730FD8C",
     "trace": false,
     "symbols": ["eth_btc", "btc_usdt", "eth_usdt"]
 }

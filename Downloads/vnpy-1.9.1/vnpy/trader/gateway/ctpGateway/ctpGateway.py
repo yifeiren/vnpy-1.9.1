@@ -341,6 +341,7 @@ class CtpMdApi(MdApi):
     def onRtnDepthMarketData(self, data):
         """行情推送"""
         # 过滤尚未获取合约交易所时的行情推送
+        #print(data)
         symbol = data['InstrumentID']
         if symbol not in symbolExchangeDict:
             return

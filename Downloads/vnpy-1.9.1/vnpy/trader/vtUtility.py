@@ -219,12 +219,16 @@ class ArrayManager(object):
         
     #----------------------------------------------------------------------
     def atr(self, n, array=False):
-        """ATR指标"""
-        result = talib.ATR(self.high, self.low, self.close, n)
-        if array:
-            return result
-        return result[-1]
-        
+        try:
+            """ATR指标"""
+            result = talib.ATR(self.high, self.low, self.close, n)
+            if array:
+                return result
+            print("high %f, low %f, ATR %f rate %f" % (self.high, self.low,result[-1], result[-1]/self.close))
+            return result[-1]
+        except Exception as e:
+            print e
+
     #----------------------------------------------------------------------
     def rsi(self, n, array=False):
         """RSI指标"""

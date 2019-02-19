@@ -110,24 +110,27 @@ class BacktestingEngine(object):
         """运行回测"""
         self.output(u'开始回放K线数据')
         
-        for dt, barDict in self.dataDict.items():
-            self.currentDt = dt
-            
-            previousResult = self.result
-            
-            self.result = DailyResult(dt)
-            self.result.updatePos(self.portfolio.posDict)
-            self.resultList.append(self.result)
-            
-            if previousResult:
-                self.result.updatePreviousClose(previousResult.closeDict)
-            
-            for bar in barDict.values():
-                self.portfolio.onBar(bar)
-                self.result.updateBar(bar)
-        
+         for dt, barDict in self.dataDict.items():
+        #     self.currentDt = dt
+        #
+        #     previousResult = self.result
+        #
+        #     self.result = DailyResult(dt)
+        #     self.result.updatePos(self.portfolio.posDict)
+        #     self.resultList.append(self.result)
+        #
+        #     if previousResult:
+        #         self.result.updatePreviousClose(previousResult.closeDict)
+        #
+        #     for bar in barDict.values():
+        #         self.portfolio.onBar(bar)
+        #         self.result.updateBar(bar)
+            self.portfolio.onBar(bar)
+
         self.output(u'K线数据回放结束')
-    
+
+
+
     #----------------------------------------------------------------------
     def calculateResult(self, annualDays=240):
         """计算结果"""

@@ -161,15 +161,15 @@ class DualThrustStrategy(CtaTemplate):
 
             if self.initialized == False:
 
-                self.lastdayHigh = float(bar.open) * 1.05
-                self.lastdayLow = float(bar.open) * 0.95
+                self.lastdayHigh = float(bar.open) * 1.06
+                self.lastdayLow = float(bar.open) * 0.94
                 self.lastdayOpen = float(bar.open)
                 self.lastdayClose = float(bar.open)
 
                 self.range = max(self.lastdayHigh - self.lastdayClose, self.lastdayClose - self.lastdayLow)
                 #self.range = self.lastdayHigh - self.lastdayLow
-                self.longEntry = float(bar.open) + self.k1 * self.range
-                self.shortEntry = float(bar.open)- self.k2 * self.range
+                self.longEntry = float(bar.open) + self.range
+                self.shortEntry = float(bar.open)- 0.002
 
             else:
                 self.lastdayHigh = self.dayHigh

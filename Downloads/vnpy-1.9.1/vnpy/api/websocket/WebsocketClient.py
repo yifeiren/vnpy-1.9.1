@@ -192,7 +192,7 @@ class WebsocketClient(object):
                 # todo: just log this, notifying user is not necessary
                 self.onError(et, ev, tb)
                 self._reconnect()
-            for i in range(60):
+            for i in range(25):
                 if not self._active:
                     break
                 time.sleep(1)
@@ -202,6 +202,7 @@ class WebsocketClient(object):
         ws = self._getWs()
         if ws:
             ws.send('ping', websocket.ABNF.OPCODE_PING)
+            print(ping)
     
     #----------------------------------------------------------------------
     @staticmethod

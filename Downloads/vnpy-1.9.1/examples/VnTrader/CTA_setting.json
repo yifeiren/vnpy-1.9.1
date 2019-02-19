@@ -1,8 +1,8 @@
 [
     {
-        "name": "Dual Thrust",
-        "className": "DualThrustStrategy",
-        "vtSymbol": "EOS-USD-181130"
+        "name": "TurtleTradingMulti",
+        "className": "TurtleTradingMultiStrategy",
+        "vtSymbol": "rb2001"
     }
 
 ]

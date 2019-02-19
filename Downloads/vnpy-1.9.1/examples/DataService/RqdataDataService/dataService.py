@@ -3,7 +3,7 @@
 from __future__ import print_function
 import sys
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from time import time, sleep
 
 from pymongo import MongoClient, ASCENDING
@@ -50,15 +50,25 @@ def generateVtBar(row, symbol):
     
     return bar
 
+def getallInstrments():
+    all = rq.all_instruments(type = 'Future', country='cn')
+
+    tmp_date = datetime.now() - timedelta(days=20*365)
+    all = all.query("maturity_date <= '{0}'".format(tmp_date))
+
+    return (all)
+
 #----------------------------------------------------------------------
 def downloadMinuteBarBySymbol(symbol):
     """下载某一合约的分钟线数据"""
     start = time()
 
+
+
     cl = db[symbol]
     cl.ensure_index([('datetime', ASCENDING)], unique=True)         # 添加索引
-    
-    df = rq.get_price(symbol, frequency='1m', fields=FIELDS)
+
+    df = rq.get_price(symbol, frequency='1m', fields=FIELDS,start_date = '1900-01-01', end_date = '2013-01-04')
     
     for ix, row in df.iterrows():
         bar = generateVtBar(row, symbol)
@@ -68,8 +78,10 @@ def downloadMinuteBarBySymbol(symbol):
 
     end = time()
     cost = (end - start) * 1000
-
-    print(u'合约%s数据下载完成%s - %s，耗时%s毫秒' %(symbol, df.index[0], df.index[-1], cost))
+    if df.empty == True:
+        pass
+    else:
+        print(u'合约%s数据下载完成%s - %s，耗时%s毫秒' %(symbol, df.index[0], df.index[-1], cost))
 
 #----------------------------------------------------------------------
 def downloadDailyBarBySymbol(symbol):
@@ -79,7 +91,9 @@ def downloadDailyBarBySymbol(symbol):
     cl = db2[symbol]
     cl.ensure_index([('datetime', ASCENDING)], unique=True)         # 添加索引
     
-    df = rq.get_price(symbol, frequency='1d', fields=FIELDS, end_date=datetime.now().strftime('%Y%m%d'))
+    #df = rq.get_price(symbol, frequency='1d', fields=FIELDS, start_date='1900-1-1', end_date= '2013-01-04' )
+    df = rq.get_price(symbol, frequency='1d', fields=FIELDS, start_date='2013-1-4', end_date = datetime.now().strftime('%Y%m%d'))
+                      #end_date=datetime.now().strftime('%Y%m%d'))
     
     for ix, row in df.iterrows():
         bar = generateVtBar(row, symbol)
@@ -89,8 +103,10 @@ def downloadDailyBarBySymbol(symbol):
 
     end = time()
     cost = (end - start) * 1000
-
-    print(u'合约%s数据下载完成%s - %s，耗时%s毫秒' %(symbol, df.index[0], df.index[-1], cost))
+    if df.empty == True:
+        pass
+    else:
+        print(u'合约%s数据下载完成%s - %s，耗时%s毫秒' %(symbol, df.index[0], df.index[-1], cost))
 
 
 #----------------------------------------------------------------------

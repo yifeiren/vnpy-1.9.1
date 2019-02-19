@@ -23,7 +23,7 @@ class TurtleTradingStrategy(CtaTemplate):
     entryWindow = 55                    # 入场通道窗口
     exitWindow = 20                     # 出场通道窗口
     atrWindow = 20                      # 计算ATR波动率的窗口
-    initDays = 10                       # 初始化数据所用的天数
+    initDays = 60                       # 初始化数据所用的天数
     fixedSize = 1                       # 每次交易的数量
 
     # 策略变量
